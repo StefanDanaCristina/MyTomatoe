@@ -11,6 +11,6 @@ public class MyUser {
     Long id;
 
     //One to many???
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     List<Task> tasks;
 }

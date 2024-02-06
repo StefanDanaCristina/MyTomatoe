@@ -1,6 +1,8 @@
 package com.cristina.mytomatoe;
 
+import com.cristina.mytomatoe.domain.MyUser;
 import com.cristina.mytomatoe.domain.Task;
+import com.cristina.mytomatoe.repositories.MyUserRepository;
 import com.cristina.mytomatoe.repositories.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +21,16 @@ public class MyTomatoeApplication {
 	}
 
 	@Bean
-	public CommandLineRunner loadData(TaskRepository taskRepository){
+	public CommandLineRunner loadData(TaskRepository taskRepository, MyUserRepository userRepository){
 		return (args) ->{
-//			taskRepository.save(new Task(1L,"nap",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task(2L,"kinap cat",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task(3L,"reply to the Nigerian prince",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task(4L,"save world",5,"High" ,"Chores","InProgress"));
+			MyUser myUser = new MyUser();
+			userRepository.save(myUser);
+			taskRepository.save(new Task("nap",5,"High" ,"Chores","InProgress",myUser));
+			taskRepository.save(new Task("kinap cat",5,"High" ,"Chores","InProgress",myUser));
+			taskRepository.save(new Task("reply to the Nigerian prince",5,"High" ,"Chores","InProgress",myUser));
+			taskRepository.save(new Task("save world",5,"High" ,"Chores","InProgress",myUser));
 
-			taskRepository.save(new Task("nap2",5,"High" ,"Chores","InProgress"));
+			//taskRepository.save(new Task("nap2",5,"High" ,"Chores","InProgress"));
 
 			//			taskRepository.save(new Task("kinap cat2",5,"High" ,"Chores","InProgress"));
 //			taskRepository.save(new Task("reply to the Nigerian prince2",5,"High" ,"Chores","InProgress"));

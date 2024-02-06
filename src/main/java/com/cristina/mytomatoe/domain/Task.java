@@ -15,16 +15,18 @@ public class Task {
     private String category; //enum
     private String status; //enum
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false) //specifies the FK column in task Table
     private MyUser user;
 
-    public Task( String name, int duration, String priority, String category, String status) {
+    public Task( String name, int duration, String priority, String category, String status, MyUser user) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.priority = priority;
         this.category = category;
         this.status = status;
+        this.user = user;
     }
 
     protected Task() { //used by JPA
