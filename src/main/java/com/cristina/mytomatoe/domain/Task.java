@@ -7,7 +7,7 @@ import java.util.UUID;
 @Entity
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private int duration;
@@ -16,7 +16,9 @@ public class Task {
     private String status; //enum
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false) //specifies the FK column in task Table
+    //@JoinColumn(name="user_id", nullable=false) //specifies the FK column in task Table
+    @JoinTable(name = "task_user", joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private MyUser user;
 
     public Task( String name, int duration, String priority, String category, String status, MyUser user) {

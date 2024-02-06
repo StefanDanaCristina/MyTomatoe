@@ -11,6 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SpringBootApplication
 public class MyTomatoeApplication {
 
@@ -20,33 +23,5 @@ public class MyTomatoeApplication {
 		SpringApplication.run(MyTomatoeApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner loadData(TaskRepository taskRepository, MyUserRepository userRepository){
-		return (args) ->{
-			MyUser myUser = new MyUser();
-			userRepository.save(myUser);
-			taskRepository.save(new Task("nap",5,"High" ,"Chores","InProgress",myUser));
-			taskRepository.save(new Task("kinap cat",5,"High" ,"Chores","InProgress",myUser));
-			taskRepository.save(new Task("reply to the Nigerian prince",5,"High" ,"Chores","InProgress",myUser));
-			taskRepository.save(new Task("save world",5,"High" ,"Chores","InProgress",myUser));
-
-			//taskRepository.save(new Task("nap2",5,"High" ,"Chores","InProgress"));
-
-			//			taskRepository.save(new Task("kinap cat2",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task("reply to the Nigerian prince2",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task("save world2",5,"High" ,"Chores","InProgress"));
-
-
-
-			log.info("Tasks found with foundAll():");
-			log.info("----------------------------");
-			taskRepository.findAll().forEach(task -> {
-				log.info(task.getName());
-				log.info("--");
-			});
-			log.info("----------------------------");
-		};
-
-	}
 
 }
