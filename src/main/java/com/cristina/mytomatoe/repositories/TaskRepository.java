@@ -10,4 +10,7 @@ import java.util.List;
 //And generated queries based on the methods declared below! Nice!
 public interface TaskRepository extends CrudRepository<Task, Long> {
     List<String> findByName(String name);
+    Iterable<Task> findByCategory(String category);
+
+
 }

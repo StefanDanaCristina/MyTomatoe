@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+     Long id;
 
 
 
@@ -37,4 +38,27 @@ public class MyUser {
         this.tasks = tasks;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MyUser myUser = (MyUser) o;
+
+        return Objects.equals(id, myUser.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "MyUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", tasks=" + tasks +
+                '}';
+    }
 }

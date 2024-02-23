@@ -27,12 +27,14 @@ public class BootStrap implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         MyUser myUser = new MyUser();
+        MyUser savedUser = myUserRepository.save(myUser);
+
         Task task1 = new Task("nap", 5, "High", "Chores", "InProgress", myUser);
         Task task2 = new Task("kinap cat", 5, "High", "Chores", "InProgress", myUser);
         Task task3 = new Task("reply to the Nigerian prince", 5, "High", "Chores", "InProgress", myUser);
         Task task4 = new Task("save world", 5, "High", "Chores", "InProgress", myUser);
 
-        MyUser savedUser = myUserRepository.save(myUser);
+        //MyUser savedUser = myUserRepository.save(myUser);
         Task savedTask1 = taskRepository.save(task1);
         Task savedTask2 = taskRepository.save(task2);
         Task savedTask3 = taskRepository.save(task3);
@@ -42,6 +44,23 @@ public class BootStrap implements CommandLineRunner {
         savedUser.getTasks().add(savedTask2);
         savedUser.getTasks().add(savedTask3);
         savedUser.getTasks().add(savedTask4);
+
+        Task task5 = new Task("NonNegotiables1", 5, "High", "NonNegotiables", "InProgress", myUser);
+        Task task6 = new Task("NonNegotiables2", 5, "High", "NonNegotiables", "InProgress", myUser);
+        Task task7 = new Task("NonNegotiables3", 5, "High", "NonNegotiables", "InProgress", myUser);
+        Task task8 = new Task("NonNegotiables4", 5, "High", "NonNegotiables", "InProgress", myUser);
+
+        //MyUser savedUser = myUserRepository.save(myUser);
+        Task savedTask5 = taskRepository.save(task5);
+        Task savedTask6 = taskRepository.save(task6);
+        Task savedTask7 = taskRepository.save(task7);
+        Task savedTask8 = taskRepository.save(task8);
+
+        savedUser.getTasks().add(savedTask5);
+        savedUser.getTasks().add(savedTask6);
+        savedUser.getTasks().add(savedTask7);
+        savedUser.getTasks().add(savedTask8);
+
         myUserRepository.save(savedUser);
 
 
