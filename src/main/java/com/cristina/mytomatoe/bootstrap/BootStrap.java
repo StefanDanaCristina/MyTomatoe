@@ -29,10 +29,45 @@ public class BootStrap implements CommandLineRunner {
         MyUser myUser = new MyUser();
         MyUser savedUser = myUserRepository.save(myUser);
 
-        Task task1 = new Task("nap", 5, "High", "Chores", "InProgress", myUser);
-        Task task2 = new Task("kinap cat", 5, "High", "Chores", "InProgress", myUser);
-        Task task3 = new Task("reply to the Nigerian prince", 5, "High", "Chores", "InProgress", myUser);
-        Task task4 = new Task("save world", 5, "High", "Chores", "InProgress", myUser);
+        Task task1 = Task.builder()
+                    .name("nap")
+                    .duration(5)
+                    .priority("High")
+                    .category("Chores")
+                    .status("InProgres")
+                    .user(myUser)
+                    .frequency("None")
+                .build();
+
+        Task task2 = Task.builder()
+                .name("kinap cat")
+                .duration(5)
+                .priority("High")
+                .category("Chores")
+                .status("InProgres")
+                .user(myUser)
+                .frequency("None")
+                .build();
+
+        Task task3 = Task.builder()
+                .name("reply to the Nigerian prince")
+                .duration(5)
+                .priority("High")
+                .category("Chores")
+                .status("InProgres")
+                .user(myUser)
+                .frequency("None")
+                .build();
+
+        Task task4 = Task.builder()
+                .name("save world")
+                .duration(5)
+                .priority("High")
+                .category("Chores")
+                .status("InProgres")
+                .user(myUser)
+                .frequency("None")
+                .build();
 
         //MyUser savedUser = myUserRepository.save(myUser);
         Task savedTask1 = taskRepository.save(task1);
@@ -45,10 +80,46 @@ public class BootStrap implements CommandLineRunner {
         savedUser.getTasks().add(savedTask3);
         savedUser.getTasks().add(savedTask4);
 
-        Task task5 = new Task("NonNegotiables1", 5, "High", "NonNegotiables", "InProgress", myUser);
-        Task task6 = new Task("NonNegotiables2", 5, "High", "NonNegotiables", "InProgress", myUser);
-        Task task7 = new Task("NonNegotiables3", 5, "High", "NonNegotiables", "InProgress", myUser);
-        Task task8 = new Task("NonNegotiables4", 5, "High", "NonNegotiables", "InProgress", myUser);
+
+        Task task5 = Task.builder()
+                    .name("NonNegotiables1")
+                    .duration(5)
+                    .priority("High")
+                    .category("NonNegotiables")
+                    .status("InProgress")
+                    .user(myUser)
+                    .frequency("Daily")
+                .build();
+
+        Task task6 = Task.builder()
+                .name("NonNegotiables2")
+                .duration(5)
+                .priority("High")
+                .category("NonNegotiables")
+                .status("InProgress")
+                .user(myUser)
+                .frequency("Monthly")
+                .build();
+
+        Task task7 = Task.builder()
+                .name("NonNegotiables3")
+                .duration(5)
+                .priority("High")
+                .category("NonNegotiables")
+                .status("InProgress")
+                .user(myUser)
+                .frequency("Yearly")
+                .build();
+
+        Task task8 = Task.builder()
+                .name("NonNegotiables4")
+                .duration(5)
+                .priority("High")
+                .category("NonNegotiables")
+                .status("InProgress")
+                .user(myUser)
+                .frequency("Daily")
+                .build();
 
         //MyUser savedUser = myUserRepository.save(myUser);
         Task savedTask5 = taskRepository.save(task5);
@@ -72,7 +143,6 @@ public class BootStrap implements CommandLineRunner {
 //			taskRepository.save(new Task("save world2",5,"High" ,"Chores","InProgress"));
 
 
-
         log.info("Tasks found with foundAll():");
         log.info("----------------------------");
         taskRepository.findAll().forEach(task -> {
@@ -83,16 +153,6 @@ public class BootStrap implements CommandLineRunner {
 
         log.info(String.valueOf(taskRepository.count()));
         log.info(String.valueOf(myUserRepository.count()));
-//			log.info("Users found with foundAll():");
-//			log.info("----------------------------");
-//			userRepository.findAll().forEach(user -> {
-//				log.info(user.getUsername());
-//				user.getTasks().forEach(task->{log.info(task.getName());
-//				log.info("-");
-//				});
-//				log.info("--");
-//			});
-//			log.info("----------------------------");
     }
 
 }
