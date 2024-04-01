@@ -389,7 +389,9 @@
 														<input type="priority" id="priority" name="priority" required>
 														<br>
 														<label for="status">Status:</label>
-														<input type="status" id="status" name="status" required>
+														<select id="dropdown">
+															<option th:each="status : ${statusEnums}" th:value="${status}" th:text="${status}"></option>
+														</select>
 														<br>
 														<button type="submit">Submit</button>
 													</form>

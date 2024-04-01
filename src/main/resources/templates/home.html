@@ -12,7 +12,11 @@
     <link rel="stylesheet" href="./vendor/owl-carousel/css/owl.theme.default.min.css">
     <link href="./vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
-
+	<style>
+        .hidden-form {
+            display: none;
+        }
+    </style>
 
 
 </head>
@@ -22,13 +26,13 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
-    </div>
+    <!-- <div id="preloader"> -->
+        <!-- <div class="sk-three-bounce"> -->
+            <!-- <div class="sk-child sk-bounce1"></div> -->
+            <!-- <div class="sk-child sk-bounce2"></div> -->
+            <!-- <div class="sk-child sk-bounce3"></div> -->
+        <!-- </div> -->
+    <!-- </div> -->
     <!--*******************
         Preloader end
     ********************-->
@@ -332,15 +336,11 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
+        <!--**********************************
+            My current Tasks table
+        ***********************************-->	
                 <div class="row">
-<!--                    <div class="col-lg-4">-->
-<!--                        <div class="card">-->
-<!--                            <div class="card-body">-->
-<!--                                <div class="year-calendar"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-                    <div class="col-lg-8">
+                    <div class="col-lg-8">				
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">My Current Tasks</h4>
@@ -350,11 +350,15 @@
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
+                                                <th>Id</th>
+                                                <th>UserId</th>
+                                                <th>UserName</th>
                                                 <th>Name</th>
                                                 <th>Duration</th>
                                                 <th>Category</th>
                                                 <th>Priority</th>
                                                 <th>Status</th>
+                                                <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -366,11 +370,59 @@
 <!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
 <!--                                                    <label><input type="checkbox"><i></i><span></span></label>-->
 <!--                                                </td>-->
+                                                <td th:text="${task.id}"><span>1</span></td>
+                                                <td th:text="${task.user.id}"><span>2</span></td>
+                                                <td th:text="${task.user.username}"><span>testUser</span></td>
                                                 <td th:text="${task.name}"><span>Dell-985</span></td>
                                                 <td th:text="${task.duration}"><span>Dell-985</span></td>
                                                 <td th:text="${task.category}"><span>456 pcs</span></td>
                                                 <td th:text="${task.priority}"><span class="badge badge-success">High</span></td>
                                                 <td th:text="${task.status}"><span class="badge badge-success">Done</span></td>
+                                                <td>
+													<button onclick="toggleForm()">Edit</button>
+													<!-- Hidden form -->
+													<form class="hidden-form" th:action="@{/submitMyCurrentTasks}" method="post">
+														<label for="name">Name:</label>
+														<input type="text" id="name" name="name">
+														<br>
+														<label for="duration">Duration:</label>
+														<input type="duration" id="duration" name="duration">
+														<br>
+														<label for="category">Category:</label>
+														<input type="category" id="category" name="category">
+														<br>
+														<label for="priority">Priority:</label>
+														<input type="priority" id="priority" name="priority">
+														<br>
+														<label for="status">Status:</label>
+														<select name="selectedValue">
+															<option th:each="status : ${statusEnums}" th:value="${status}" th:text="${status}"></option>
+														</select>
+														<br>
+														<input type="hidden" id="taskID" name="taskID" th:value="${task.id}">
+														<input type="hidden" id="userID" name="userID" th:value="${task.user.id}">
+														<input type="hidden" id="username" name="username" th:value="${task.user.username}">
+														<button type="submitMyCurrentTasks">Submit</button>
+													</form>
+
+													<!-- JavaScript to control the visibility of the form -->
+													<script th:inline="javascript">
+														/* Function to toggle the visibility of the form */
+														function toggleForm() {
+															var form = document.querySelector('.hidden-form');
+															if (form.style.display === 'none') {
+																form.style.display = 'block';
+															} else {
+																form.style.display = 'none';
+															}
+														}
+													</script>
+												</td>
+                                                <!-- <td> -->
+												<!-- <select id="dropdown"> -->
+												  <!-- <option th:value="${task.status}" th:text="${task.status}" disabled selected>Select an option</option> -->
+												   <!-- <option th:each="task : ${tasks}" th:value="${task.status}" th:text="${task.status}"></option> -->
+												<!-- </td> -->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -379,90 +431,114 @@
                         </div>
                     </div>
 
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 col-xl-4 col-xxl-6 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Timeline</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="widget-timeline">
-                                    <ul class="timeline">
-                                        <li>
-                                            <div class="timeline-badge primary"></div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>10 minutes ago</span>
-                                                <h6 class="m-t-5">Youtube, a video-sharing website, goes live.</h6>
-                                            </a>
-                                        </li>
+<!--**********************************
+           Timeline
+***********************************-->	
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-lg-6 col-xl-4 col-xxl-6 col-md-6"> -->
+                        <!-- <div class="card"> -->
+                            <!-- <div class="card-header"> -->
+                                <!-- <h4 class="card-title">Timeline</h4> -->
+                            <!-- </div> -->
+                            <!-- <div class="card-body"> -->
+                                <!-- <div class="widget-timeline"> -->
+                                    <!-- <ul class="timeline"> -->
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge primary"></div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>10 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Youtube, a video-sharing website, goes live.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge warning">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>20 minutes ago</span>
-                                                <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6>
-                                            </a>
-                                        </li>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge warning"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>20 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge danger">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>30 minutes ago</span>
-                                                <h6 class="m-t-5">Google acquires Youtube.</h6>
-                                            </a>
-                                        </li>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge danger"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>30 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Google acquires Youtube.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge success">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>15 minutes ago</span>
-                                                <h6 class="m-t-5">StumbleUpon is acquired by eBay. </h6>
-                                            </a>
-                                        </li>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge success"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>15 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">StumbleUpon is acquired by eBay. </h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge warning">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>20 minutes ago</span>
-                                                <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6>
-                                            </a>
-                                        </li>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge warning"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>20 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge dark">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>20 minutes ago</span>
-                                                <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6>
-                                            </a>
-                                        </li>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge dark"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>20 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Mashable, a news website and blog, goes live.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
 
-                                        <li>
-                                            <div class="timeline-badge info">
-                                            </div>
-                                            <a class="timeline-panel text-muted" href="#">
-                                                <span>30 minutes ago</span>
-                                                <h6 class="m-t-5">Google acquires Youtube.</h6>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                        <!-- <li> -->
+                                            <!-- <div class="timeline-badge info"> -->
+                                            <!-- </div> -->
+                                            <!-- <a class="timeline-panel text-muted" href="#"> -->
+                                                <!-- <span>30 minutes ago</span> -->
+                                                <!-- <h6 class="m-t-5">Google acquires Youtube.</h6> -->
+                                            <!-- </a> -->
+                                        <!-- </li> -->
+                                    <!-- </ul> -->
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
 
-                        </div>
-                    </div>
-                </div>
+                <!-- </div> -->
+ <!--**********************************
+            Drop down
+        ***********************************-->	
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-lg-8">				 -->
+                        <!-- <div class="card"> -->
+                            <!-- <div class="card-header"> -->
+                                <!-- <h4 class="card-title">My Current Test</h4> -->
+                            <!-- </div> -->
+                            <!-- <div class="card-body"> -->
+								<!-- <select id="dropdown"> -->
+								  <!-- <option value="" disabled selected>Select an option</option> -->
+								  <!-- <option value="option1">Option 1</option> -->
+								  <!-- <option value="option2">Option 2</option> -->
+								  <!-- <option value="option3">Option 3</option> -->
+								  <!-- <option value="option4">Option 4</option> -->
+								<!-- </select> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
 
+                <!-- </div> -->
             </div>
         </div>
+
+    </div>
+    
         <!--**********************************
             Content body end
         ***********************************-->
@@ -489,7 +565,7 @@
         ***********************************-->
 
 
-    </div>
+    
     <!--**********************************
         Main wrapper end
     ***********************************-->

@@ -1,5 +1,6 @@
 package com.cristina.mytomatoe.repositories;
 
+import com.cristina.mytomatoe.domain.MyUser;
 import com.cristina.mytomatoe.domain.Task;
 import org.springframework.data.repository.CrudRepository;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public interface TaskRepository extends CrudRepository<Task, Long> {
     List<String> findByName(String name);
     Iterable<Task> findByCategory(String category);
+
+    Iterable<Task> findByUser(MyUser user);
+
 
 
 }

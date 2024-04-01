@@ -2,6 +2,7 @@ package com.cristina.mytomatoe.services;
 
 import com.cristina.mytomatoe.domain.Task;
 import com.cristina.mytomatoe.domain.TaskStatus;
+import com.cristina.mytomatoe.repositories.MyUserRepository;
 import com.cristina.mytomatoe.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.stream.StreamSupport;
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
+
 
     public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
