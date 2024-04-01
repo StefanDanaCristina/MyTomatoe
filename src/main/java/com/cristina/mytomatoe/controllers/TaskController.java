@@ -1,5 +1,6 @@
 package com.cristina.mytomatoe.controllers;
 
+import com.cristina.mytomatoe.domain.TaskStatus;
 import com.cristina.mytomatoe.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class TaskController {
     @RequestMapping("/dailyNonNegotiables")
     public String getDailyNonNegotiables(Model model){
         model.addAttribute("tasks", taskService.findAllByCategoryNonNegotiables());
-        return "dailyNonNegotiables";
+        model.addAttribute("statusEnums", TaskStatus.values());
+        return "dropDown";
     }
 }

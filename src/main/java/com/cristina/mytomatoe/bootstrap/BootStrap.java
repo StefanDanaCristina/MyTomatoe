@@ -3,6 +3,7 @@ package com.cristina.mytomatoe.bootstrap;
 import com.cristina.mytomatoe.MyTomatoeApplication;
 import com.cristina.mytomatoe.domain.MyUser;
 import com.cristina.mytomatoe.domain.Task;
+import com.cristina.mytomatoe.domain.TaskStatus;
 import com.cristina.mytomatoe.repositories.MyUserRepository;
 import com.cristina.mytomatoe.repositories.TaskRepository;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class BootStrap implements CommandLineRunner {
                     .duration(5)
                     .priority("High")
                     .category("Chores")
-                    .status("InProgres")
+                    .status(TaskStatus.DONE)
                     .user(myUser)
                     .frequency("None")
                 .build();
@@ -44,7 +45,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("Chores")
-                .status("InProgres")
+                .status(TaskStatus.NOT_STARTED)
                 .user(myUser)
                 .frequency("None")
                 .build();
@@ -54,7 +55,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("Chores")
-                .status("InProgres")
+                .status(TaskStatus.IN_PROGRESS)
                 .user(myUser)
                 .frequency("None")
                 .build();
@@ -64,7 +65,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("Chores")
-                .status("InProgres")
+                .status(TaskStatus.IN_PROGRESS)
                 .user(myUser)
                 .frequency("None")
                 .build();
@@ -86,7 +87,7 @@ public class BootStrap implements CommandLineRunner {
                     .duration(5)
                     .priority("High")
                     .category("NonNegotiables")
-                    .status("InProgress")
+                    .status(TaskStatus.IN_PROGRESS)
                     .user(myUser)
                     .frequency("Daily")
                 .build();
@@ -96,7 +97,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("NonNegotiables")
-                .status("InProgress")
+                .status(TaskStatus.DONE)
                 .user(myUser)
                 .frequency("Monthly")
                 .build();
@@ -106,7 +107,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("NonNegotiables")
-                .status("InProgress")
+                .status(TaskStatus.NOT_STARTED)
                 .user(myUser)
                 .frequency("Yearly")
                 .build();
@@ -116,7 +117,7 @@ public class BootStrap implements CommandLineRunner {
                 .duration(5)
                 .priority("High")
                 .category("NonNegotiables")
-                .status("InProgress")
+                .status(TaskStatus.IN_PROGRESS)
                 .user(myUser)
                 .frequency("Daily")
                 .build();
@@ -136,11 +137,11 @@ public class BootStrap implements CommandLineRunner {
 
 
         //userRepository.save(myUser);
-        //taskRepository.save(new Task("nap2",5,"High" ,"Chores","InProgress"));
+        //taskRepository.save(new Task("nap2",5,"High" ,"Chores",TaskStatus.IN_PROGRESS));
 
-        //			taskRepository.save(new Task("kinap cat2",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task("reply to the Nigerian prince2",5,"High" ,"Chores","InProgress"));
-//			taskRepository.save(new Task("save world2",5,"High" ,"Chores","InProgress"));
+        //			taskRepository.save(new Task("kinap cat2",5,"High" ,"Chores",TaskStatus.IN_PROGRESS));
+//			taskRepository.save(new Task("reply to the Nigerian prince2",5,"High" ,"Chores",TaskStatus.IN_PROGRESS));
+//			taskRepository.save(new Task("save world2",5,"High" ,"Chores",TaskStatus.IN_PROGRESS));
 
 
         log.info("Tasks found with foundAll():");

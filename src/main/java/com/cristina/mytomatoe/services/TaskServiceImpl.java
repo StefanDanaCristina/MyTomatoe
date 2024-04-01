@@ -1,6 +1,7 @@
 package com.cristina.mytomatoe.services;
 
 import com.cristina.mytomatoe.domain.Task;
+import com.cristina.mytomatoe.domain.TaskStatus;
 import com.cristina.mytomatoe.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +40,5 @@ public class TaskServiceImpl implements TaskService {
             if (task.getCategory()!="NonNegotiables") list.add(task);
         return list;
     }
+
 }

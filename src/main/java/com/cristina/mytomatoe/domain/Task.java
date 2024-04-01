@@ -28,8 +28,8 @@ public class Task {
     @NonNull
     private String category; //enum
 
-    @NonNull
-    private String status; //enum
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status; //enum
 
     @ManyToOne
     //@JoinColumn(name="user_id", nullable=false) //specifies the FK column in task Table
@@ -39,7 +39,7 @@ public class Task {
 
     private String frequency; //enum
 
-    public Task(@NonNull String name, int duration, @NonNull String priority, @NonNull String category, @NonNull String status, MyUser user, String frequency) {
+    public Task(@NonNull String name, int duration, @NonNull String priority, @NonNull String category, @NonNull TaskStatus status, MyUser user, String frequency) {
         this.name = name;
         this.duration = duration;
         this.priority = priority;

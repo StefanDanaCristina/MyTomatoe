@@ -1,6 +1,7 @@
 package com.cristina.mytomatoe.services;
 
 import com.cristina.mytomatoe.domain.Task;
+import com.cristina.mytomatoe.domain.TaskStatus;
 
 import java.util.List;
 
