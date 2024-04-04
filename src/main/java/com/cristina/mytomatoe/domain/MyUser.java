@@ -1,6 +1,8 @@
 package com.cristina.mytomatoe.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.NonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,13 +15,19 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
      Long id;
 
+    public MyUser(@NonNull String username) {
+        this.username = username;
+    }
 
-
+    @NonNull
     String username;
 
     //One to many???
     @OneToMany(mappedBy = "user")
     Set<Task> tasks = new HashSet<>();;
+
+    public MyUser() {
+    }
 
     public Long getId() {
         return id;

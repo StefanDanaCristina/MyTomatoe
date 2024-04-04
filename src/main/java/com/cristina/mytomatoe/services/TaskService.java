@@ -5,11 +5,17 @@ import com.cristina.mytomatoe.domain.Task;
 import com.cristina.mytomatoe.domain.TaskStatus;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskService {
     List<Task> findAll();
     Iterable<Task> findAllByCategoryNonNegotiables();
     Iterable<Task> findAllExceptCategoryNonNegotiables();
+
+    Iterable<Task> findByUserName(String myUser);
+
+    Task save(Task task);
+
    // void updateTask(String name, int duration, String category, String priority, String status);
 
 }

@@ -17,7 +17,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NonNull
+  @NonNull
     private String name;
 
     private int duration;
@@ -58,4 +58,5 @@ public class Task {
         this.user = user;
         this.frequency = frequency;
     }*/
+
 }

@@ -27,7 +27,7 @@ public class BootStrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        MyUser myUser = new MyUser();
+        MyUser myUser = new MyUser("Cris");
         MyUser savedUser = myUserRepository.save(myUser);
 
         Task task1 = Task.builder()
