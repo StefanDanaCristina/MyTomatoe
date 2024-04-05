@@ -16,6 +16,8 @@ public interface TaskService {
 
     Task save(Task task);
 
+    Optional<Task> findById(Long id);
+
    // void updateTask(String name, int duration, String category, String priority, String status);
 
 }
