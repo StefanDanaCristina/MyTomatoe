@@ -18,14 +18,8 @@ public class MyUserImpl implements MyUserService {
     }
 
     @Override
-    public Iterable<MyUser> findById(Long id) {
-       Optional<MyUser> optionalUser =  myUserRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            List<MyUser> returnedList = new ArrayList<>();
-            returnedList.add(optionalUser.get());
-            return returnedList;
-        }
-        else return Collections.emptyList();
+    public Optional<MyUser> findById(Long id) {
+       return  myUserRepository.findById(id);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.cristina.mytomatoe.domain.Task;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 //No need for a implementation of this interface.
 // Spring Data JPA creates an implementation when you run the application
@@ -14,6 +15,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     Iterable<Task> findByCategory(String category);
 
     Iterable<Task> findByUser(MyUser user);
+
 
 
 

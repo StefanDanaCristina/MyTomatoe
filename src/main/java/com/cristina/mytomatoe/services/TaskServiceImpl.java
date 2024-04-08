@@ -2,14 +2,11 @@ package com.cristina.mytomatoe.services;
 
 import com.cristina.mytomatoe.domain.MyUser;
 import com.cristina.mytomatoe.domain.Task;
-import com.cristina.mytomatoe.domain.TaskStatus;
 import com.cristina.mytomatoe.repositories.MyUserRepository;
 import com.cristina.mytomatoe.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -63,5 +60,10 @@ public class TaskServiceImpl implements TaskService {
     public Optional<Task> findById(Long id) {
         return taskRepository.findById(id);
     }
+
+//    @Override
+//    public Optional<MyUser> findByUser(MyUser user) {
+//        return taskRepository.findByUser(user);
+//    }
 
 }

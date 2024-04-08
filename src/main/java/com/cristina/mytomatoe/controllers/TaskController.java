@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -25,9 +22,18 @@ public class TaskController {
 
     private TaskService taskService;
 
+
+
+    private MyUserService myUserService;
+
     @Autowired
     public void setTaskService(TaskService taskService) {
         this.taskService = taskService;
+    }
+
+   @Autowired
+    public void setMyUserService(MyUserService myUserService) {
+        this.myUserService = myUserService;
     }
 
     @RequestMapping("/home")
@@ -44,7 +50,7 @@ public class TaskController {
         return "dropDown";
     }
 
-    @PostMapping("/submitMyCurrentTasks")
+    @PostMapping("/submitEditedCurrentTask")
     public String editTask(Model model, HttpServletRequest request, @RequestParam("name") String name, @RequestParam("duration") String duration,
                            @RequestParam("category") String category,
                            @RequestParam("priority") String priority, @RequestParam("selectedValue") String taskStatus,
@@ -88,6 +94,39 @@ public class TaskController {
 //                .build();
         //taskService.save(task1);
        // String referer = request.getHeader("Referer");
+
+    }
+    @PostMapping("/submitNewCurrentTask")
+    public String addTask(Model model, HttpServletRequest request, @RequestParam("name") String name,
+                           @RequestParam("duration") String duration, @RequestParam("category") String category,
+                           @RequestParam("priority") String priority, @RequestParam("selectedValue") String taskStatus
+//                          ,
+//                           @RequestParam("taskID") Long taskID,
+//                           @RequestParam("userID") String userID,
+//                           @RequestParam("username")String username
+    ){
+        model.addAttribute("tasks", taskService.findAllExceptCategoryNonNegotiables());
+        model.addAttribute("statusEnums", TaskStatus.values());
+        //TO DO
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//        // Get the username from the authentication object
+//        String username = authentication.getName();
+//
+//        // Add the username to the model
+//        model.addAttribute("username", username);
+
+       Optional<MyUser> myUser = myUserService.findByUserName("Cris");//fetch the first user from db
+       Task task1 = Task.builder()
+                .name(name)
+                .duration(Integer.parseInt(duration))
+                .category(category)
+                .priority(priority)
+                .status(TaskStatus.valueOf(taskStatus))
+                .user(myUser.get()) //HARCODED User; TO DO Authentication
+                .build();
+        taskService.save(task1);
+        return "redirect:" + "/home";
 
     }
 }
