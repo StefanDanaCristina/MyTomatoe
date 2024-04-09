@@ -20,5 +20,6 @@ public interface TaskService {
    // Optional<MyUser> findUserForTaskId(Long id);
 
    // void updateTask(String name, int duration, String category, String priority, String status);
+   void deleteById(Long id);
 
 }

@@ -61,6 +61,11 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findById(id);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        taskRepository.deleteById(id);
+    }
+
 //    @Override
 //    public Optional<MyUser> findByUser(MyUser user) {
 //        return taskRepository.findByUser(user);
