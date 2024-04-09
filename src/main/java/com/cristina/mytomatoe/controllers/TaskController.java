@@ -129,4 +129,26 @@ public class TaskController {
         return "redirect:" + "/home";
 
     }
+    @PostMapping("/deleteCurrentTask")
+    public String editTask(Model model, HttpServletRequest request,
+//                           @RequestParam("name") String name, @RequestParam("duration") String duration,
+//                           @RequestParam("category") String category,
+//                           @RequestParam("priority") String priority, @RequestParam("selectedValue") String taskStatus,
+                           @RequestParam("taskID") Long taskID
+//                           , @RequestParam("userID") String userID,
+//                           @RequestParam("username")String username
+    ){
+        model.addAttribute("tasks", taskService.findAllExceptCategoryNonNegotiables());
+        model.addAttribute("statusEnums", TaskStatus.values());
+//        log.info("GET THE INPUT FROM USER: name=" + name+" duration: "+duration+ " category: "+category+" priority: "+priority +
+//                " selectedValue: "+taskStatus+ " taskID: "+taskID + " userID: " + userID + " username: "+username);
+        Optional<Task> taskOptional= taskService.findById(taskID);
+        if(taskOptional.isPresent()){
+            taskService.deleteById(taskID);
+            return "redirect:" + "/home";
+
+        }
+        else return "TO DO ERROR HANDLING";
+
+    }
 }

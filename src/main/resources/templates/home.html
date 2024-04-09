@@ -361,7 +361,7 @@
                                                 <th>Category</th>
                                                 <th>Priority</th>
                                                 <th>Status</th>
-                                                <th>#</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -420,6 +420,25 @@
 															}
 														}
 													</script>
+													<!-- <button onclick="toggleFormDeleteTask()">Delete</button> -->
+													<!-- Hidden form -->
+													<form class="hidden-formDeteleTask" th:action="@{/deleteCurrentTask}" method="post">
+														<input type="hidden" id="taskID" name="taskID" th:value="${task.id}">
+														<button type="deleteCurrentTask">Delete</button>
+													</form>
+
+													<!-- JavaScript to control the visibility of the form -->
+													<!-- <script th:inline="javascript"> -->
+														<!-- /* Function to toggle the visibility of the form */ -->
+														<!-- function toggleFormDeleteTask() { -->
+															<!-- var form = document.querySelector('.hidden-formDeteleTask'); -->
+															<!-- if (form.style.display === 'none') { -->
+																<!-- form.style.display = 'block'; -->
+															<!-- } else { -->
+																<!-- form.style.display = 'none'; -->
+															<!-- } -->
+														<!-- } -->
+													<!-- </script> -->
 												</td>
                                                 <!-- <td> -->
 												<!-- <select id="dropdown"> -->
